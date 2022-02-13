@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>TODO APP</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="todo.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+	<div class="modal fade" id="editTodoItem" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	 	<div class="modal-dialog modal-dialog-centered">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLabel">Update Item</h5>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <div class="modal-body">
+	        <form>
+	          <div class="mb-3">
+	            <label for="updateTask" class="col-form-label">Task</label>
+	            <input type="text" class="form-control" id="updateTask">
+	          </div>
+	          <div class="mb-3">
+	            <label for="updateDiscription" class="col-form-label">Discription</label>
+	            <textarea class="form-control" id="updateDiscription"></textarea>
+	          </div>
+	        </form>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+	        <button type="button" class="btn btn-primary" id='todoItemUpdateBtn'>Update</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<div class="container pt-4">
+		<nav>
+		  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+		    <button class="nav-link active" id="nav-todo-tab" data-bs-toggle="tab" data-bs-target="#nav-todo" type="button" onclick="getAllTodoItem()" role="tab" aria-controls="nav-todo" aria-selected="true">Todo Item</button>
+		    <button class="nav-link" id="nav-working-tab" data-bs-toggle="tab" data-bs-target="#nav-working" type="button" onclick="getAllTodoWorking()" role="tab" aria-controls="nav-working" aria-selected="false">Working Item <span id='todoWorkNoti' class="notificationIcon fas fa-bell"></span></button>
+		    <button class="nav-link" id="nav-complete-tab" data-bs-toggle="tab" data-bs-target="#nav-complete" type="button" onclick="getAllTodoCompleted()" role="tab" aria-controls="nav-complete" aria-selected="false">Completed Item <span id='todoCompleteNoti' class="notificationIcon fas fa-bell"></span></button>
+		  </div>
+		</nav>
+		<div class="tab-content" id="nav-tabContent">
+		  <div class="tab-pane fade show active p-4" id="nav-todo" role="tabpanel" aria-labelledby="nav-todo-tab">
+		  	<div class='todoInputContainer'>
+			  	<div class="row">
+				  <div class="col">
+				    <label class="visually-hidden" for="todoItem">Task</label>
+				    <input type="text" class="form-control" placeholder="Enter Task" id='todoItem'>
+				  </div>
+				  <div class="col">
+				    <label class="visually-hidden" for="todoDiscription">Discription</label>
+				    <textarea type="text" class="form-control" placeholder="Discription" id='todoDiscription'></textarea>
+				  </div>
+	  				<div class="col">
+				    	<button class="btn btn-warning" onclick="listDownItem()">List Down</button>
+				 	</div>
+				</div>
+  			</div>
+  			<div class='mainTodoContainer'>
+  				<ul  id='mainTodoItemContainer'></ul>
+  			</div>
+   
+		  </div>
+
+
+		  <div class="tab-pane fade" id="nav-working" role="tabpanel" aria-labelledby="nav-working-tab">
+		  	<div class='mainTodoContainer'>
+  				<ul  id='mainTodoWorkingContainer'></ul>
+  			</div>
+			</div>
+
+
+		  <div class="tab-pane fade" id="nav-complete" role="tabpanel" aria-labelledby="nav-complete-tab">
+		  	<div class='mainTodoContainer'>
+  				<ul  id='mainTodoCompleteContainer'></ul>
+  			</div>
+			</div>
+		</div>
+	</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script type="text/javascript" src='todo.js'></script>
+</body>
+</html>
