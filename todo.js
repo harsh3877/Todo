@@ -170,7 +170,7 @@ function getAllTodoWorking(){
 
 		todoWorking.forEach(x=>{
 			document.getElementById('mainTodoWorkingContainer').innerHTML+="<div class='item todoWorking'>"+
-			"<div class='itemText'>"+x.item+"-"+x.discription+
+			"<div class='itemText'><b><i>"+x.item+"</b></i> : "+x.discription+
 				"</div><div class='itemControls'>"+
 					"<i class='fas fa-check' onclick='todotaskCompleted(2,todoWorking,"+x.id+")'></i>"+
 					"<i class='fas fa-trash'  onclick=deleteTodoItem(2,todoWorking,"+x.id+")></i>"+
@@ -226,7 +226,7 @@ function getAllTodoCompleted(){
 
 	todoCompleted.forEach(x=>{
 		document.getElementById('mainTodoCompleteContainer').innerHTML+="<div class='item itemCompleted'>"+
-		"<div class='itemText'>"+x.item+"-"+x.discription+
+		"<div class='itemText'><b><i>"+x.item+"</b></i> : "+x.discription+
 			"</div><div class='itemControls'>"+
 				"<i class='fas fa-spinner' onclick='todotaskWorking(3,todoCompleted,"+x.id+")'></i>"+
 				"<i class='fas fa-trash' onclick='deleteTodoItem(3,todoCompleted,"+x.id+")'></i>"+
