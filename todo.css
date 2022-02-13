@@ -38,7 +38,7 @@
 }
 
 .noItemPresent{
-	background-color: #d9d9d9;
+	background-color: #f8aeae;
 }
 
 .mainTodoContainer{
@@ -60,4 +60,16 @@
     margin-top: -5px;
     opacity: 0;
     transition: 0.5s;
+}
+
+.itemCompleted{
+	background-color: #adecad;
+}
+
+.todoWorking{
+	background-color: #ffff7e;
+}
+
+.itemText{
+	width: 90%;
 }

@@ -77,7 +77,7 @@ const todoItem=[];
 
 if(localStorage.getItem('TodoItems')){
 	todoItem.push(...JSON.parse(localStorage.getItem('TodoItems')));
-	console.log(todoItem);
+	// console.log(todoItem);
 }
 const todoCompleted=[];
 const todoWorking=[];
@@ -89,33 +89,19 @@ for(var msc=0;msc<mainScrollContainer.length;msc++){
 	mainScrollContainer[msc].style.maxHeight=(windowHeight- 300)+'px';
 }
 
+FirstPageLoad();
 
-formTodoList();
+function FirstPageLoad(){
+	formTodoList();
+}
 
 function getAllTodoItem(){
 	formTodoList();
 }
 
-function getAllTodoWorking(){
-	document.getElementById('mainTodoWorkingContainer').innerHTML='';
-	workNoti(false);
-	if(todoWorking.length==0){
-		document.getElementById('mainTodoWorkingContainer').innerHTML+="<div class='item noItemPresent'>"+
-			"<div class='itemText '>NO Task Present</div>";
-	}else{
-
-		todoWorking.forEach(x=>{
-			document.getElementById('mainTodoWorkingContainer').innerHTML+="<div class='item'>"+
-			"<div class='itemText'>"+x.item+"-"+x.discription+
-				"</div><div class='itemControls'>"+
-					"<i class='fas fa-check' onclick='todotaskCompleted(2,todoWorking,"+x.id+")'></i>"+
-					"<i class='fas fa-trash'  onclick=deleteTodoItem(2,todoWorking,"+x.id+")></i>"+
-				"</div>"+
-			"</div>";
-		})
-	}
+function updateActualTodo(){
+	localStorage.setItem('TodoItems',JSON.stringify(todoItem));
 }
-
 
 function listDownItem(){
 	var id=Math.floor(Math.random()*10000);
@@ -127,6 +113,8 @@ function listDownItem(){
 		id:id
 	});
 
+	document.getElementById('todoItem').value='';
+	document.getElementById('todoDiscription').value='';
 	localStorage.setItem('TodoItems',JSON.stringify(todoItem));
 	formTodoList();
 }
@@ -140,7 +128,7 @@ function formTodoList(){
 
 	todoItem.forEach(x=>{
 		document.getElementById('mainTodoItemContainer').innerHTML+="<div class='item'>"+
-		"<div class='itemText'>"+x.item+"-"+x.discription+
+		"<div class='itemText'><b><i>"+x.item+"</b></i> : "+x.discription+
 			"</div><div class='itemControls'>"+
 				"<i class='fas fa-spinner' onclick='todotaskWorking(1,todoItem,"+x.id+")'></i>"+
 				// "<i class='fas fa-check' onclick='todotaskCompleted(1,todoItem,"+x.id+")'></i>"+
@@ -171,7 +159,30 @@ function todotaskWorking(type,getlist,id){
 
 }
 
+
+function getAllTodoWorking(){
+	document.getElementById('mainTodoWorkingContainer').innerHTML='';
+	workNoti(false);
+	if(todoWorking.length==0){
+		document.getElementById('mainTodoWorkingContainer').innerHTML+="<div class='item noItemPresent'>"+
+			"<div class='itemText '>NO Task Present</div>";
+	}else{
+
+		todoWorking.forEach(x=>{
+			document.getElementById('mainTodoWorkingContainer').innerHTML+="<div class='item todoWorking'>"+
+			"<div class='itemText'>"+x.item+"-"+x.discription+
+				"</div><div class='itemControls'>"+
+					"<i class='fas fa-check' onclick='todotaskCompleted(2,todoWorking,"+x.id+")'></i>"+
+					"<i class='fas fa-trash'  onclick=deleteTodoItem(2,todoWorking,"+x.id+")></i>"+
+				"</div>"+
+			"</div>";
+		})
+	}
+}
+
+
 function refreshList(type){
+	// updateActualTodo();
 	if(type==1){
 		formTodoList();
 	}
@@ -214,7 +225,7 @@ function getAllTodoCompleted(){
 	}else{
 
 	todoCompleted.forEach(x=>{
-		document.getElementById('mainTodoCompleteContainer').innerHTML+="<div class='item'>"+
+		document.getElementById('mainTodoCompleteContainer').innerHTML+="<div class='item itemCompleted'>"+
 		"<div class='itemText'>"+x.item+"-"+x.discription+
 			"</div><div class='itemControls'>"+
 				"<i class='fas fa-spinner' onclick='todotaskWorking(3,todoCompleted,"+x.id+")'></i>"+
