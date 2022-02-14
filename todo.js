@@ -132,6 +132,7 @@ function getAllTodoItem(){
 function updateAllList(){
 	localStorage.setItem('TodoItems',JSON.stringify(todoItem));
 	localStorage.setItem('TodoWorking',JSON.stringify(todoWorking));
+	localStorage.setItem('TodoComplete',JSON.stringify(todoCompleted));
 }
 
 
