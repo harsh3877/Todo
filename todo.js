@@ -73,15 +73,45 @@
 // 		discription:'This is description 5',
 // 		id:15
 // 	}];
+var workNoti = function (state){
+	if(state){
+		document.getElementById('todoWorkNoti').style.opacity=1;
+	}else{
+		document.getElementById('todoWorkNoti').style.opacity=0;
+
+	}
+}
+
+var completeNoti = function (state){
+	if(state){
+		document.getElementById('todoCompleteNoti').style.opacity=1;
+	}else{
+		document.getElementById('todoCompleteNoti').style.opacity=0;
+
+	}
+}
+
 const todoItem=[];
 
 if(localStorage.getItem('TodoItems')){
 	todoItem.push(...JSON.parse(localStorage.getItem('TodoItems')));
-	// console.log(todoItem);
 }
-const todoCompleted=[];
 const todoWorking=[];
 
+if(localStorage.getItem('TodoWorking')){
+	todoWorking.push(...JSON.parse(localStorage.getItem('TodoWorking')));
+	if(todoWorking.length>0){
+		workNoti(true);
+	}
+}
+
+const todoCompleted=[];
+if(localStorage.getItem('TodoComplete')){
+	todoCompleted.push(...JSON.parse(localStorage.getItem('TodoComplete')));
+	if(todoCompleted.length>0){
+		completeNoti(true);
+	}
+}
 var windowHeight=window.outerHeight;
 
 var mainScrollContainer = document.querySelectorAll('.mainTodoContainer');
@@ -99,9 +129,11 @@ function getAllTodoItem(){
 	formTodoList();
 }
 
-function updateActualTodo(){
+function updateAllList(){
 	localStorage.setItem('TodoItems',JSON.stringify(todoItem));
+	localStorage.setItem('TodoWorking',JSON.stringify(todoWorking));
 }
+
 
 function listDownItem(){
 	var id=Math.floor(Math.random()*10000);
@@ -149,6 +181,7 @@ function todotaskWorking(type,getlist,id){
 		}else{
 			let itemIndex = getlist.findIndex(x => x.id === id);
 			todoWorking.push(getlist[itemIndex]);
+			localStorage.setItem('TodoWorking',JSON.stringify(todoWorking));
 			getlist.splice(itemIndex, 1);
 			workNoti(true);
 			refreshList(type);
@@ -182,7 +215,7 @@ function getAllTodoWorking(){
 
 
 function refreshList(type){
-	// updateActualTodo();
+	updateAllList();
 	if(type==1){
 		formTodoList();
 	}
@@ -208,6 +241,7 @@ function todotaskCompleted(type,getlist,id){
 			todoCompleted.push(getlist[itemIndex]);
 			getlist.splice(itemIndex, 1);
 			completeNoti(true);
+			localStorage.setItem('TodoComplete',JSON.stringify(todoCompleted));
 			refreshList(type);
 
 			break;
@@ -243,9 +277,6 @@ function editTodoItem(type,getlist,id){
 			console.log('not found');
 		}else{
 			let itemIndex = getlist.findIndex(x => x.id === id);
-			// todoCompleted.push(getlist[itemIndex]);
-			// getlist.splice(itemIndex, 1);
-			// refreshList(type);
 			document.getElementById('updateTask').value=getlist[itemIndex].item;
 			document.getElementById('updateDiscription').value=getlist[itemIndex].discription;
 			document.getElementById('todoItemUpdateBtn').setAttribute('onclick',"updateTodoItem(1,"+id+")");
@@ -284,6 +315,7 @@ function deleteTodoItem(type, getlist, id){
 			let itemIndex = getlist.findIndex(x => x.id === id);
 			
 			getlist.splice(itemIndex, 1);
+
 			refreshList(type);
 			
 			break;
@@ -292,20 +324,3 @@ function deleteTodoItem(type, getlist, id){
 	}
 }
 
-var workNoti = function (state){
-	if(state){
-		document.getElementById('todoWorkNoti').style.opacity=1;
-	}else{
-		document.getElementById('todoWorkNoti').style.opacity=0;
-
-	}
-}
-
-var completeNoti = function (state){
-	if(state){
-		document.getElementById('todoCompleteNoti').style.opacity=1;
-	}else{
-		document.getElementById('todoCompleteNoti').style.opacity=0;
-
-	}
-}
